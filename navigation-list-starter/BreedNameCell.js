@@ -11,6 +11,7 @@ import { StyleSheet, View, Text, TouchableHighlight } from 'react-native'
 // tapped.
 // Go back to HomeScreen.js 
 
+// deconstructing props here, these would've been props.
 const BreedNameCell = ({ item, onPress }) => {
   return (
     <TouchableHighlight 

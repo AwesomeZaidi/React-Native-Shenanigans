@@ -38,7 +38,10 @@ export default class HomeScreen extends React.Component {
         <FlatList 
           style={styles.list}
           data={cats}
-          renderItem={({item}) => <BreedNameCell onPress={() => console.log('Need to implement nav')} item={item} />}
+          renderItem={({item}) => (<BreedNameCell
+            onPress={() => navigate('Detail', item)}
+            item={item}
+            />)}
           keyExtractor={(item, index) => `${index}-${item.breed}`}
         />
       </View>
