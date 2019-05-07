@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text
-    // Button,
+    Text,
+    Button,
+    AsyncStorage
     // TextInput,
     // StyleSheet
 } from 'react-native';
@@ -10,15 +11,20 @@ import {
 class SignIn extends Component {
     
     static navigationOptions = {
-		title: 'Sign in'
+        title: 'Please sign in',
     };
-
+    
     render() {
         return (
-            <View>
-                <Text>Signin</Text>
-            </View>
-        )
+          <View>
+            <Button title="Sign in!" onPress={this._signInAsync} />
+          </View>
+        );
+    };
+
+    _signInAsync = async () => {
+        await AsyncStorage.setItem('userToken', 'abc');
+        this.props.navigation.navigate('App');
     };
 };
 
