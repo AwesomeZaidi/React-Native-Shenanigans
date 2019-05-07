@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import { View,Image,  FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 //import styles for your component
 import styles from './styles';
+//import your component
+import PokeCard from '../PokeCard';
 
 export default class PokeList extends PureComponent {
     //Define your state for your component. 
@@ -27,14 +29,9 @@ export default class PokeList extends PureComponent {
     }
     //Define your renderItem method the callback for the FlatList for rendering each item, and pass data as a argument. 
     renderItem(data) {
-        return <TouchableOpacity style={{backgroundColor: 'transparent'}}>
-                    <View  style={styles.listItemContainer}>
-                        <Text style={styles.pokeItemHeader}>{data.item.name}</Text>
-                        <Image source={{uri: 'https://res.cloudinary.com/aa1997/image/upload/v1535930682/pokeball-image.jpg'}} 
-                                style={styles.pokeImage}/>
-                    </View>
-                </TouchableOpacity>
+        return <PokeCard {...data.item} />
     }
+    
     render() {
         //Destruct pokeList and Loading from state.
         const { pokeList, loading } = this.state;
