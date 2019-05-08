@@ -6,7 +6,7 @@ import styles from './styles';
 //import your component
 import PokeCard from '../PokeCard';
 
-export default class PokeList extends PureComponent {
+class PokeList extends PureComponent {    
     //Define your state for your component. 
     state = {
         //Assing a array to your pokeList state
@@ -14,9 +14,15 @@ export default class PokeList extends PureComponent {
         //Have a loading state where when data retrieve returns data. 
         loading: true
     }
+
+    static navigationOptions = {
+        title: 'List of Pokemon'
+    }
+
     //Define your componentDidMount lifecycle hook that will retrieve data.
     //Also have the async keyword to indicate that it is asynchronous. 
     async componentDidMount() {
+        console.log('IN COMPONENT');
         //Have a try and catch block for catching errors.
         try {
             //Assign the promise unresolved first then get the data using the json method. 
@@ -27,14 +33,18 @@ export default class PokeList extends PureComponent {
             console.log("Error fetching data-----------", err);
         }
     }
-    //Define your renderItem method the callback for the FlatList for rendering each item, and pass data as a argument. 
-    renderItem(data) {
-        return <PokeCard {...data.item} />
-    }
+    // OLD
+    // //Define your renderItem method the callback for the FlatList for rendering each item, and pass data as a argument. 
+    // renderItem(data) {
+    //     return <PokeCard {...data.item} />
+    // }
     
     render() {
+      
         //Destruct pokeList and Loading from state.
         const { pokeList, loading } = this.state;
+        //Destruct navigation from props 
+        const { navigation } = this.props;
         //If laoding to false, return a FlatList which will have data, rednerItem, and keyExtractor props used.
         //Data contains the data being  mapped over.
         //RenderItem a callback return UI for each item.
@@ -42,7 +52,7 @@ export default class PokeList extends PureComponent {
         if(!loading) {
             return <FlatList 
                     data={pokeList}
-                    renderItem={this.renderItem}
+                    renderItem={(data) => <PokeCard {...data.item} navigation={navigation} />}
                     keyExtractor={(item) => item.name} 
                     />
         } else {
@@ -50,3 +60,6 @@ export default class PokeList extends PureComponent {
         }
     }
 }
+
+
+export default PokeList;

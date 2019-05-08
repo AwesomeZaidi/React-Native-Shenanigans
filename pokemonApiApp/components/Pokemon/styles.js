@@ -1,24 +1,16 @@
-//import styleSheet for creating a css abstraction.
+//import StyleSheet from react-native to provide styling via a css abstraction
 import { StyleSheet } from 'react-native';
 
+//Define your styles 
 const styles = StyleSheet.create({
-    listItemContainer: {
-        borderStyle: 'solid',
-        borderColor: '#fff',
-        borderBottomWidth: 2,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 20
+    pokemonImage: {
+        height: 250,
+        width: 250
     },
-    pokeItemHeader: {  
-        color: '#fff',
-        fontSize: 24,
-    },
-    pokeImage: {
-        backgroundColor: 'transparent',
-        height: 50,
-        width: 50
+    nameOfPokemon: {
+        fontSize: 25
     }
 })
 
+//Export your styles
 export default styles;
