@@ -9,9 +9,9 @@ const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const DIGITAL_MENU_STATE = "DIGITAL_MENU_STATE";
 
 // Load State 
-export const loadState = () => {
+export const loadState = async () => {
   try {
-    const serializedState = localStorage.getItem(DIGITAL_MENU_STATE)
+    const serializedState = await AsyncStorage.getItem(DIGITAL_MENU_STATE)
     if (serializedState === null) {
       return undefined
     }
@@ -22,12 +22,12 @@ export const loadState = () => {
 };
 
 // Save State
-export const saveState = (state) => {
+export const saveState = async (state) => {
   try {
     const serializedState = JSON.stringify(state)
-    localStorage.setItem(DIGITAL_MENU_STATE, serializedState)
-  } catch(err) {
-    console.log("Error saving data")
+    await AsyncStorage.setItem(DIGITAL_MENU_STATE, serializedState)
+  } catch(error) {
+    console.log("Error saving data:", error)
   };
 };
 
