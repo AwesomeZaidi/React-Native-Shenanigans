@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { signUp } from "../../../redux/actions/index";
 
+import common from '../../styles/common.style';
 import styles from '../styles/forms.js';
 import { placeholder } from '../../styles/variables';
 
@@ -44,6 +45,10 @@ class SignUp extends Component {
         });
     };
     
+
+    // ------------------------------------------
+    // Input action functions
+    // ------------------------------------------ 
     onFocus = (type) => {
         console.log('type:', type);
         this.setState({
@@ -121,14 +126,9 @@ class SignUp extends Component {
                 buttonStyle={styles.primary_btn}
                 onPress={this.handleSubmit}
             />
-            <View style={styles.otherAuthOption}>
-                <Text>Already have an account? </Text>
-                <Text 
-                    onPress={this.signIn}
-                    style={[styles.otherAuthOptionBtn, styles.anotherStyle]}
-                >
-                    Log in
-                </Text>
+            <View style={common.centerVerticalElements}>
+                <Text style={common.text_sm}>Already have an account? </Text>
+                <Text style={[styles.text_bold_read]}>Login</Text>
             </View>
           </ScrollView>
         );

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import common from '../../styles/common.style';
 import {
   bg, primary, secondary, danger, placeholder, light,
   purple, third
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
   form: {
     backgroundColor: bg
   },
+  // TEXT STYLES
   h1_primary: {
     marginTop: 30,
     marginBottom: 30,
@@ -15,6 +17,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: primary
+  },
+  text_bold_read: {
+    ...common.text_sm,
+    fontWeight: 'bold',
   },
   appTitle: {
     marginTop: 60,
