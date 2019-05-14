@@ -31,8 +31,8 @@ const AppStack = createStackNavigator({
 
 // Idea to split the stacks  for organization, by Nicolai!
 const AuthStack = createStackNavigator({ 
-	SignIn: SignInScreen,
-	SignUp: SignUpScreen
+	SignUp: SignUpScreen,
+	SignIn: SignInScreen
 });
 
 // Containers are responsible for managing your app state and linking your top-level navigator to the app environment.
