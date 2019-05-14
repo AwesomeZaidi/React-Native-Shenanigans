@@ -4,8 +4,12 @@ import {
   AsyncStorage,
   StatusBar,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
+// lottie file not working
+// import LottieView from 'lottie-react-native';
+// import loadingAnimation from '../../assets/loading.json';
 
 class AuthLoading extends React.Component {
   constructor(props) {
@@ -15,7 +19,7 @@ class AuthLoading extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
+    const userToken = await AsyncStorage.getItem('APP_NAME_STATE');
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -30,7 +34,7 @@ class AuthLoading extends React.Component {
         <StatusBar barStyle="default" />
       </View>
     );
-  }
-}
+  };
+};
 
 export default AuthLoading;
