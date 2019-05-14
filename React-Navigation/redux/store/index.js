@@ -3,15 +3,16 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers";
 import thunk from "redux-thunk";
+import {AsyncStorage} from 'react-native';
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const DIGITAL_MENU_STATE = "DIGITAL_MENU_STATE";
+const ASIMS_STATE = "ASIMS_STATE";
 
 // Load State 
 export const loadState = async () => {
   try {
-    const serializedState = await AsyncStorage.getItem(DIGITAL_MENU_STATE)
+    const serializedState = await AsyncStorage.getItem(ASIMS_STATE)
     if (serializedState === null) {
       return undefined
     }
@@ -25,7 +26,7 @@ export const loadState = async () => {
 export const saveState = async (state) => {
   try {
     const serializedState = JSON.stringify(state)
-    await AsyncStorage.setItem(DIGITAL_MENU_STATE, serializedState)
+    await AsyncStorage.setItem(ASIMS_STATE, serializedState)
   } catch(error) {
     console.log("Error saving data:", error)
   };
