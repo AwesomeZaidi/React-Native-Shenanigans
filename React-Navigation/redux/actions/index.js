@@ -3,7 +3,7 @@
 import { HANDLE_LOGIN, HANDLE_SIGNUP, HANDLE_LOGOUT, HANDLE_ERROR, HANDLE_ADD_RESTAURANT, HANDLE_ADD_LOCATION, HANDLE_GET_ITEMS } from "../constants/action-types";
 import axios from "axios";
 
-const baseUrl = 'https://clubs-app-backend.herokuapp.com/';
+const baseUrl = 'https://digitalmenu-intensive.herokuapp.com/';
 
 export function login(loginState) {
     return (dispatcher) => { // read more into dispatcher
@@ -23,20 +23,23 @@ export const handleLogin = (user) => {
     };
 };
 
-export function signup(signupState) {
+export function signUp(signupState) {
+    console.log('signupstate:', signupState);
     return (dispatcher) => {
         axios.post(`${baseUrl}users/v0/signup`, signupState).then((res) => {
-            console.log("res.data:", res.data);
+            console.log('res.data:', res.data);
             dispatcher(handleSignup(res.data));
-        }).catch(console.err);
+        }).catch((err) => {
+            console.log('err:', err);            
+            dispatcher(handleError(true));
+        });
     };
 };
 
 export const handleSignup = (user) => {
     return {
         type: HANDLE_SIGNUP,
-        payload: user,
-        payload_error: false
+        payload: user
     };
 };
 
