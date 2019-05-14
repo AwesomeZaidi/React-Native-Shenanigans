@@ -1,7 +1,13 @@
-const green = '#28a745';
-const red = '#c0392b';
-const bgColor = '#f1f2f6'; // light grey
-const lightGrey = '#d1d2d6'; // light-med grey
+const bg = '#EBEFF3'; // light gray
+const primary = '#488aff'; // idk
+const secondary = '#32db64'; // dark purple
+const danger = '#fa4359'; // smooth red
 const placeholder = '#757575'; // med grey
-const grey = '#6c757d'; // dark grey
-export { red, green, grey, placeholder, bgColor, lightGrey };
+const light = '#f4f4f4'; // light grey
+const purple = '#6400e4';
+const third = '#fff'; // white
+
+export {
+    bg, primary, secondary, danger, placeholder, light,
+    purple, third
+};
