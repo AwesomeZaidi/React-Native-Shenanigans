@@ -1,5 +1,16 @@
 import React from 'react';
-import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createRootNavigator,
+	createStackNavigator,
+	createSwitchNavigator,
+	createAppContainer,
+	SwitchNavigator
+} from 'react-navigation';
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+// ----------------------------------------------------------------------------------
+// Components Imports
+// ----------------------------------------------------------------------------------
 import HomeScreen from './pages/Home/'
 import DetailScreen from './pages/Detail/'
 import SignUpScreen from './pages/AuthScreens/SignUp/'
@@ -14,13 +25,8 @@ import AuthLoadingScreen from './pages/AuthScreens/AuthLoading';
 // TODO: navigationOptions for screens inside of the navigator
 // I don't fully understand that tbh ^ I think for now I just need to understand the title option...
 const AppStack = createStackNavigator({
-  // // For each screen that you can navigate to, create a new entry like this:
-	Home: {
-		screen: HomeScreen // `HomeScreen` is a React component that will be the main content of the screen.
-	},
-	Detail: {
-		screen: DetailScreen
-	}	
+		Home: HomeScreen,
+		Detail: DetailScreen
 });
 
 // Idea to split the stacks  for organization, by Nicolai!
@@ -37,24 +43,33 @@ const AuthStack = createStackNavigator({
 // we want to throw away the state of the authentication flow and unmount all of the screens, and when
 // we press the hardware back button we expect to not be able to go back to the authentication flow.
 // We switch between routes in the SwitchNavigator by using the navigate action.
-const App = createAppContainer(createSwitchNavigator(
+// the switch stack which determines if logged in, the shows one of above
+const MainNavigator = createAppContainer(createSwitchNavigator(
 	{
 		AuthLoading: AuthLoadingScreen,
 		App: AppStack,
 		Auth: AuthStack,
-	},  {
+	},
+	{
 		// We set the initialRouteName to 'AuthLoading' because we will fetch our authentication
 		// state from persistent storage inside of that screen component.
 		initialRouteName: 'AuthLoading',
-	  }
+	}
 ));
-// Now App is the main component for React to render
 
-// Props of createAppContainer on React Native
-{/* <AppContainer
-  onNavigationStateChange={handleNavigationChange}
-  uriPrefix="/app"
-/> */}
+// Render the app container component with the provider around it
+class App extends React.Component {
+	render() {
+	  return (
+		<Provider store={store}>
+		  <MainNavigator />
+		</Provider>
+	  );
+	}
+  }
+
+
+export default App;
 
 // onNavigationStateChange(prevState, newState, action)
 // Function that gets called every time navigation state managed by the navigator changes.It receives the previous state, the
@@ -63,5 +78,3 @@ const App = createAppContainer(createSwitchNavigator(
 // uriPrefix
 // The prefix of the URIs that the app might handle.
 // This will be used when handling a deep link to extract the path passed to the router.
-
-export default App;
