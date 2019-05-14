@@ -23,7 +23,9 @@ class SignUp extends Component {
         email: '',
         username: '',
         password: '',
-        inputPressed: false
+        emailFocused: false,
+        usernameFocused: false,
+        passwordFocused: false
     };
 
     // ------------------------------------------
@@ -42,20 +44,21 @@ class SignUp extends Component {
         });
     };
     
-    onFocus = () => {
+    onFocus = (type) => {
+        console.log('type:', type);
         this.setState({
-            inputPressed: true
-        })
-    }
+            [type]: true
+        });
+    };
 
-    onBlur = (feildName) => {
+    onBlur = (feildName, type) => {
         !this.state[feildName] ?
             this.setState({
-                inputPressed: false
+                [type]: false
             })
         :
         null
-    }
+    };
 
     // ------------------------------------------
     // signUp redux action handler function attached to props. 
@@ -75,7 +78,7 @@ class SignUp extends Component {
     render() {
 
         { this.props.user ? this.props.navigation.navigate('Home') : null }
-        
+        console.log('this.state.emailFocused:', this.state.emailFocused);
         return (
           <ScrollView
             style={styles.form}
@@ -86,9 +89,9 @@ class SignUp extends Component {
             <TextInput
                 onChangeText={(text) => this.onChangeText(text, 'email')}
                 value={this.state.email}
-                style={this.state.inputPressed ? styles.inputFieldFocus : styles.inputFieldBlur}
-                onFocus={ () => this.onFocus() }
-                onBlur={ () => this.onBlur('email') }
+                style={this.state.emailFocused ? styles.inputFieldFocus : styles.inputFieldBlur}
+                onFocus={ () => this.onFocus('emailFocused') }
+                onBlur={ () => this.onBlur('email', 'emailFocused') }
                 placeholder='Email Adress'
                 placeholderTextColor={placeholder}
                 autoCapitalize='none'
@@ -97,7 +100,9 @@ class SignUp extends Component {
             <TextInput
                 onChangeText={(text) => this.onChangeText(text, 'username')}
                 value={this.state.username}
-                style={styles.inputField}
+                style={this.state.usernameFocused ? styles.inputFieldFocus : styles.inputFieldBlur}
+                onFocus={ () => this.onFocus('usernameFocused') }
+                onBlur={ () => this.onBlur('username', 'usernameFocused') }
                 placeholder='Username'
                 autoCapitalize='none'
                 placeholderTextColor={placeholder}
@@ -105,7 +110,9 @@ class SignUp extends Component {
             <TextInput
                 onChangeText={(text) => this.onChangeText(text, 'password')}
                 value={this.state.password}
-                style={styles.inputField}
+                style={this.state.passwordFocused ? styles.inputFieldFocus : styles.inputFieldBlur}
+                onFocus={ () => this.onFocus('passwordFocused') }
+                onBlur={ () => this.onBlur('password', 'passwordFocused') }
                 placeholder='Password'
                 placeholderTextColor={placeholder}
             />
