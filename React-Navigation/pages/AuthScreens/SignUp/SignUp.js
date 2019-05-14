@@ -1,17 +1,13 @@
 
+// ----------------------------------------------------------------------------------
+// Imports
+// ----------------------------------------------------------------------------------
+import { View, Text, Button, ScrollView, TextInput } from 'react-native';
+
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { signUp } from "../../../redux/actions/index";
-console.log('signUp:', signUp);
 
-// ----------------------------------------------------------------------------------
-// React Native Imports
-// ----------------------------------------------------------------------------------
-import { View, Text, Button, AsyncStorage, TextInput } from 'react-native';
-
-// ----------------------------------------------------------------------------------
-// Components / Styles Imports
-// ----------------------------------------------------------------------------------
 import styles from '../styles/forms.js';
 import { placeholder } from '../../styles/variables';
 
@@ -19,20 +15,22 @@ import { placeholder } from '../../styles/variables';
 // SignUp Component Class
 // ----------------------------------------------------------------------------------
 class SignUp extends Component {    
+    
     // ------------------------------------------
     // State
     // ------------------------------------------
     state = {
         email: '',
         username: '',
-        password: ''
+        password: '',
+        inputPressed: false
     };
 
     // ------------------------------------------
     // Navigation Options: title
     // ------------------------------------------
     static navigationOptions = {
-        title: 'Signup',
+        title: 'Sign Up',
     };
 
     // ------------------------------------------
@@ -43,12 +41,22 @@ class SignUp extends Component {
             [feildName]: text
         });
     };
-    // onChangeText(text, fieldName) {
-    //     this.setState({
-    //       [fieldName]: text,
-    //     })
-    // }
     
+    onFocus = () => {
+        this.setState({
+            inputPressed: true
+        })
+    }
+
+    onBlur = (feildName) => {
+        !this.state[feildName] ?
+            this.setState({
+                inputPressed: false
+            })
+        :
+        null
+    }
+
     // ------------------------------------------
     // signUp redux action handler function attached to props. 
     // ------------------------------------------ 
@@ -57,18 +65,32 @@ class SignUp extends Component {
         this.props.navigation.navigate('App');
     };
 
-    render() {
-        console.log('in render');
+    // ------------------------------------------
+    // signIn component function that navigates user to SignIn screen. 
+    // ------------------------------------------  
+    signIn = () => {
+        this.props.navigation.navigate('SignIn');
+    };
 
-        // { this.props.user ? this.props.navigation.navigate('Home') : null }
+    render() {
+
+        { this.props.user ? this.props.navigation.navigate('Home') : null }
+        
         return (
-          <View style={styles.formStyle}>
+          <ScrollView
+            style={styles.form}
+            keyboardShouldPersistTaps='handled'
+            contentContainerStyle={styles.wrapper}
+          >
+            <Text style={styles.h1_primary}>Logo Here</Text>
             <TextInput
                 onChangeText={(text) => this.onChangeText(text, 'email')}
                 value={this.state.email}
+                style={this.state.inputPressed ? styles.inputFieldFocus : styles.inputFieldBlur}
+                onFocus={ () => this.onFocus() }
+                onBlur={ () => this.onBlur('email') }
                 placeholder='Email Adress'
                 placeholderTextColor={placeholder}
-                style={styles.inputField}
                 autoCapitalize='none'
                 keyboardType='email-address'
             />
@@ -92,7 +114,16 @@ class SignUp extends Component {
                 buttonStyle={styles.primary_btn}
                 onPress={this.handleSubmit}
             />
-          </View>
+            <View style={styles.otherAuthOption}>
+                <Text>Already have an account? </Text>
+                <Text 
+                    onPress={this.signIn}
+                    style={[styles.otherAuthOptionBtn, styles.anotherStyle]}
+                >
+                    Log in
+                </Text>
+            </View>
+          </ScrollView>
         );
     };
 };
