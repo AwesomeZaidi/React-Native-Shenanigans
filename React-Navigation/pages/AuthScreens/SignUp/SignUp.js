@@ -50,7 +50,6 @@ class SignUp extends Component {
     // Input action functions
     // ------------------------------------------ 
     onFocus = (type) => {
-        console.log('type:', type);
         this.setState({
             [type]: true
         });
@@ -81,9 +80,7 @@ class SignUp extends Component {
     };
 
     render() {
-
         { this.props.user ? this.props.navigation.navigate('Home') : null }
-        console.log('this.state.emailFocused:', this.state.emailFocused);
         return (
           <ScrollView
             style={styles.form}
@@ -120,6 +117,8 @@ class SignUp extends Component {
                 onBlur={ () => this.onBlur('password', 'passwordFocused') }
                 placeholder='Password'
                 placeholderTextColor={placeholder}
+                autoCapitalize = 'none'
+                secureTextEntry={true}
             />
             <Button
                 title="Signup"

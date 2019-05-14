@@ -6,12 +6,15 @@ import {
     Button,
     AsyncStorage,
     ActivityIndicator,
-    FlatList
+    FlatList,
 } from 'react-native';
+
 import Card from '../Shared/Card';
 import common from '../styles/common.style';
 
-export default class Home extends Component {
+import { connect } from "react-redux";
+
+class Home extends Component {
 
     // ------------------------------------------
     // State
@@ -31,7 +34,7 @@ export default class Home extends Component {
             //Assign the promise unresolved first then get the data using the json method. 
             const pokemonApiCall = await fetch('https://pokeapi.co/api/v2/pokemon/');
             const pokemon = await pokemonApiCall.json();
-            console.log('pokemon.results:', pokemon.results);
+            // console.log('pokemon.results:', pokemon.results);
             this.setState({pokemonList: pokemon.results, loading: false});
         } catch(err) {
             console.log("Error fetching data-----------", err);
@@ -43,19 +46,20 @@ export default class Home extends Component {
         this.props.navigation.navigate('Auth');
     };
     
-    render() {
-        console.log('this.state.loading:', this.state.loading);
-        const { pokeList, loading } = this.state;
+    render() {      
+        const { pokemonList, loading } = this.state;
         const { navigation } = this.props;
+        { this.props.user ? navigation.navigate('Home') : navigation.navigate('SignUp')}
+        console.log('hello');
         
         return (
             <ScrollView>
                 {/*add some style here later! :) */}
                 <Text style={common.text_sm}>Welcome your Dashboard</Text>
                 <Button onPress={this.logOut} title='Log Out'></Button>
-                {!this.state.loading ?
+                {!loading ?
                     <FlatList 
-                    data={this.state.pokemonList}
+                    data={pokemonList}
                     renderItem={(data) => <Card {...data.item} navigation={navigation} />}
                     keyExtractor={(item) => item.name}
                     />
@@ -71,4 +75,10 @@ export default class Home extends Component {
     };
 }
 
-const styles = StyleSheet.flatten({});
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+};
+
+export default connect(mapStateToProps, null)(Home);
