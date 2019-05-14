@@ -1,7 +1,21 @@
 import { StyleSheet } from 'react-native';
-import { red, green, grey } from '../../styles/variables';
+import {
+  bg, primary, secondary, danger, placeholder, light,
+  purple, third
+} from '../../styles/variables';
 
 const styles = StyleSheet.create({
+  form: {
+    backgroundColor: bg
+  },
+  h1_primary: {
+    marginTop: 30,
+    marginBottom: 30,
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: primary
+  },
   appTitle: {
     marginTop: 60,
     textAlign: 'center',
@@ -13,23 +27,48 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingBottom: 12,
   },
-  inputField: {
+  otherAuthOption: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  otherAuthOptionBtn: {
+    color: 'blue',
+  },
+  anotherStyle: {
+    backgroundColor: 'black',
+  },
+  inputFieldBlur: {
     fontSize: 16,
-    backgroundColor: 'white',
+    backgroundColor: bg,
     padding: 18,
     marginTop: 6,
     marginBottom: 6,
     marginLeft: 12,
     marginRight: 12,
+    borderColor: third,
+    borderRadius: 20,
+    borderWidth: 2
+  },
+  inputFieldFocus: {
+    fontSize: 16,
+    backgroundColor: third,
+    padding: 18,
+    marginTop: 6,
+    marginBottom: 6,
+    marginLeft: 12,
+    marginRight: 12,
+    borderColor: primary,
+    borderRadius: 20,
+    borderWidth: 2
   },
   helperText: {
     marginLeft: 36,
     marginRight: 36,
-    color: red,
+    // color: red,
     marginBottom: 12,
   },
   ctaBtn: {
-    backgroundColor: green,
+    // backgroundColor: green,
     marginTop: 0,
     padding: 12,
     marginLeft: 36,
@@ -44,13 +83,13 @@ const styles = StyleSheet.create({
   },
   otherOptionText: {
     fontSize: 16,
-    color: grey,
+    // color: grey,
   },
   otherBtn: {
     fontSize: 16,
     padding: 0,
     marginLeft: 12,
-    color: green,
+    // color: green,
   }
 });
 
