@@ -7,12 +7,12 @@ import {AsyncStorage} from 'react-native';
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const ASIMS_STATE = "ASIMS_STATE";
+const APP_NAME_STATE = "APP_NAME_STATE";
 
 // Load State 
 export const loadState = async () => {
   try {
-    const serializedState = await AsyncStorage.getItem(ASIMS_STATE)
+    const serializedState = await AsyncStorage.getItem(APP_NAME_STATE)
     if (serializedState === null) {
       return undefined
     }
@@ -26,7 +26,7 @@ export const loadState = async () => {
 export const saveState = async (state) => {
   try {
     const serializedState = JSON.stringify(state)
-    await AsyncStorage.setItem(ASIMS_STATE, serializedState)
+    await AsyncStorage.setItem(APP_NAME_STATE, serializedState)
   } catch(error) {
     console.log("Error saving data:", error)
   };
