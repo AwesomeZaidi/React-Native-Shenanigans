@@ -1,5 +1,6 @@
+
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default class Detail extends Component {
     render() {
@@ -10,5 +11,3 @@ export default class Detail extends Component {
         )
     }
 }
-
-const styles = StyleSheet.flatten({});
