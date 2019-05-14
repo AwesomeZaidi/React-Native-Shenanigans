@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     listItemContainer: {
+        backgroundColor: 'blue',
         borderStyle: 'solid',
         borderColor: '#fff',
         borderBottomWidth: 2,
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     pokeImage: {
-        backgroundColor: 'transparent',
+        backgroundColor: 'blue',
         height: 50,
         width: 50
     }
