@@ -2,32 +2,67 @@ import React, { Component } from 'react';
 import {
     Text,
     StyleSheet,
-    View,
+    ScrollView,
     Button,
-    AsyncStorage
+    AsyncStorage,
+    ActivityIndicator,
+    FlatList
 } from 'react-native';
+import Card from '../Shared/Card';
+import common from '../styles/common.style';
 
 export default class Home extends Component {
 
+    // ------------------------------------------
+    // State
+    // ------------------------------------------
+    state = {
+        pokemonList: [],
+        loading: true
+    };
+
     static navigationOptions = {
 		title: 'Home Page'
+    };
+
+    async componentDidMount() {
+        console.log('IN COMPONENT');
+        try {
+            //Assign the promise unresolved first then get the data using the json method. 
+            const pokemonApiCall = await fetch('https://pokeapi.co/api/v2/pokemon/');
+            const pokemon = await pokemonApiCall.json();
+            console.log('pokemon.results:', pokemon.results);
+            this.setState({pokemonList: pokemon.results, loading: false});
+        } catch(err) {
+            console.log("Error fetching data-----------", err);
+        }
     }
 
     logOut = async () => {
         await AsyncStorage.clear();
         this.props.navigation.navigate('Auth');
-    }
+    };
     
     render() {
-        const { navigate } = this.props.navigation;
+        console.log('this.state.loading:', this.state.loading);
+        const { pokeList, loading } = this.state;
+        const { navigation } = this.props;
+        
         return (
-            <View>
+            <ScrollView>
                 {/*add some style here later! :) */}
-                <Text>Welcome your Dashboard</Text>
+                <Text style={common.text_sm}>Welcome your Dashboard</Text>
                 <Button onPress={this.logOut} title='Log Out'></Button>
+                {!this.state.loading ?
+                    <FlatList 
+                    data={this.state.pokemonList}
+                    renderItem={(data) => <Card {...data.item} navigation={navigation} />}
+                    keyExtractor={(item) => item.name}
+                    />
+                : <ActivityIndicator />}
                 
                 <Button title="Show me more of the app" onPress={this._showMoreApp} />
-            </View>
+            </ScrollView>
         )
     }
 
