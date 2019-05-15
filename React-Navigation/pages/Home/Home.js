@@ -1,3 +1,7 @@
+
+// ----------------------------------------------------------------------------------
+// Imports
+// ----------------------------------------------------------------------------------
 import React, { Component } from 'react';
 import {
     Text,
@@ -19,23 +23,25 @@ class Home extends Component {
     // ------------------------------------------
     // State
     // ------------------------------------------
+    
     state = {
         pokemonList: [],
         loading: true
     };
 
+    // ------------------------------------------
+    // Navigation Options: title
+    // ------------------------------------------
+    
     static navigationOptions = {
 		title: 'Home Page'
     };
 
     async componentDidMount() {
-        console.log('IN Home Component');
-        console.log('this.props.user:', this.props.user);
         try {
             //Assign the promise unresolved first then get the data using the json method. 
             const pokemonApiCall = await fetch('https://pokeapi.co/api/v2/pokemon/');
             const pokemon = await pokemonApiCall.json();
-            // console.log('pokemon.results:', pokemon.results);
             this.setState({pokemonList: pokemon.results, loading: false});
         } catch(err) {
             console.log("Error fetching data-----------", err);
@@ -50,10 +56,8 @@ class Home extends Component {
     render() {      
         const { pokemonList, loading } = this.state;
         const { navigation } = this.props;
-        // { this.props.user ? navigation.navigate('Home') : navigation.navigate('SignUp')}
         return (
             <ScrollView>
-                {/*add some style here later! :) */}
                 <Text style={common.text_sm}>Welcome your Dashboard</Text>
                 <Button onPress={this.logOut} title='Log Out'></Button>
                 {!loading ?

@@ -9,11 +9,8 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-  console.log('state in rootReducer:', state);
-
   switch(action.type) {
     case LOAD_DATA:
-      console.log('action.payload:', action.payload);
       return action.payload
     case HANDLE_LOGIN:
       return {...state, user: action.payload}

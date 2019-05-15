@@ -25,8 +25,6 @@ export const loadState = async () => {
 
 // Save State
 export const saveState = async (state) => {
-  console.log('------------- save State -------------');
-  console.log('saveState state:', state);
   try {
     const serializedState = JSON.stringify(state)
     await AsyncStorage.setItem(APP_NAME_STATE, serializedState)
@@ -44,8 +42,6 @@ const store = createStore(
 
 const persistedState = loadState();
 persistedState.then((data) => { 
-  console.log('------------- load State -------------');
-  console.log('loadState state:', data);
   if (data !== undefined) {
     // console.log('------------- load State -------------');
     // console.log('loadState state:', data);
