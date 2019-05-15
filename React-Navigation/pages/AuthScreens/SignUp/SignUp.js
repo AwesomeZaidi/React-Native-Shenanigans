@@ -69,6 +69,9 @@ class SignUp extends Component {
     // ------------------------------------------ 
     handleSubmit = async () => {
         await this.props.signUp(this.state);
+        // console.log('this.props:', this.props);
+        console.log('this.props.user:', this.props.user);
+        // console.log('this.state.user:', this.state.user);
         this.props.navigation.navigate('App');
     };
 
@@ -79,8 +82,12 @@ class SignUp extends Component {
         this.props.navigation.navigate('SignIn');
     };
 
+
     render() {
-        { this.props.user ? this.props.navigation.navigate('Home') : null }
+        // { this.props.user ? this.props.navigation.navigate('Home') : null }
+        // console.log('this.props:', this.props);
+        console.log('this.props.user:', this.props.user);
+        // console.log('this.state.user:', this.state.user);
         return (
           <ScrollView
             style={styles.form}

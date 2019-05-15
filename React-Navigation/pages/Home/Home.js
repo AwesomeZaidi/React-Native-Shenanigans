@@ -29,7 +29,8 @@ class Home extends Component {
     };
 
     async componentDidMount() {
-        console.log('IN COMPONENT');
+        console.log('IN Home Component');
+        console.log('this.props.user:', this.props.user);
         try {
             //Assign the promise unresolved first then get the data using the json method. 
             const pokemonApiCall = await fetch('https://pokeapi.co/api/v2/pokemon/');
@@ -49,9 +50,7 @@ class Home extends Component {
     render() {      
         const { pokemonList, loading } = this.state;
         const { navigation } = this.props;
-        { this.props.user ? navigation.navigate('Home') : navigation.navigate('SignUp')}
-        console.log('hello');
-        
+        // { this.props.user ? navigation.navigate('Home') : navigation.navigate('SignUp')}
         return (
             <ScrollView>
                 {/*add some style here later! :) */}

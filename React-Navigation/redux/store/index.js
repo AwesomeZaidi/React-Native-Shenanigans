@@ -3,7 +3,8 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducers";
 import thunk from "redux-thunk";
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
+import { loadData } from '../actions/index';
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,6 +25,8 @@ export const loadState = async () => {
 
 // Save State
 export const saveState = async (state) => {
+  console.log('------------- save State -------------');
+  console.log('saveState state:', state);
   try {
     const serializedState = JSON.stringify(state)
     await AsyncStorage.setItem(APP_NAME_STATE, serializedState)
@@ -32,16 +35,25 @@ export const saveState = async (state) => {
   };
 };
 
-const persistedState = loadState();
-
 const store = createStore(
   rootReducer,
-  persistedState,
+  undefined,
   storeEnhancers(applyMiddleware(thunk))
 );
 
+
+const persistedState = loadState();
+persistedState.then((data) => { 
+  console.log('------------- load State -------------');
+  console.log('loadState state:', data);
+  if (data !== undefined) {
+    // console.log('------------- load State -------------');
+    // console.log('loadState state:', data);
+    store.dispatch(loadData(data));
+  }
+});
 store.subscribe(() => {
-  saveState(store.getState())
+  saveState(store.getState());
 });
 
 export default store;

@@ -65,8 +65,8 @@ class App extends React.Component {
 		  <MainNavigator />
 		</Provider>
 	  );
-	}
-  }
+	};
+};
 
 
 export default App;
