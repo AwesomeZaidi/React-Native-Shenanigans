@@ -20,6 +20,7 @@ class SignUp extends Component {
     // ------------------------------------------
     // State
     // ------------------------------------------
+    
     state = {
         email: '',
         username: '',
@@ -32,6 +33,7 @@ class SignUp extends Component {
     // ------------------------------------------
     // Navigation Options: title
     // ------------------------------------------
+    
     static navigationOptions = {
         title: 'Sign Up',
     };
@@ -39,6 +41,7 @@ class SignUp extends Component {
     // ------------------------------------------
     // Update state on text change
     // ------------------------------------------
+    
     onChangeText = (text, feildName) => {
         this.setState({
             [feildName]: text
@@ -49,13 +52,16 @@ class SignUp extends Component {
     // ------------------------------------------
     // Input action functions
     // ------------------------------------------ 
+    
     onFocus = (type) => {
+        // change this given type's state data to true
         this.setState({
             [type]: true
         });
     };
 
     onBlur = (feildName, type) => {
+        // if the input field is empty, change its focus state to false.
         !this.state[feildName] ?
             this.setState({
                 [type]: false
@@ -68,11 +74,12 @@ class SignUp extends Component {
     // signUp redux action handler function attached to props. 
     // ------------------------------------------ 
     handleSubmit = async () => {
-        await this.props.signUp(this.state);
-        // console.log('this.props:', this.props);
-        console.log('this.props.user:', this.props.user);
-        // console.log('this.state.user:', this.state.user);
-        this.props.navigation.navigate('App');
+        try {
+            await this.props.signUp(this.state);
+            this.props.navigation.navigate('App');
+        } catch(err) {
+            console.log("Error fetching data-----------", err);
+        }
     };
 
     // ------------------------------------------
@@ -84,10 +91,6 @@ class SignUp extends Component {
 
 
     render() {
-        // { this.props.user ? this.props.navigation.navigate('Home') : null }
-        // console.log('this.props:', this.props);
-        console.log('this.props.user:', this.props.user);
-        // console.log('this.state.user:', this.state.user);
         return (
           <ScrollView
             style={styles.form}
