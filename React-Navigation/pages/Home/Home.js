@@ -13,6 +13,7 @@ import {
     FlatList,
 } from 'react-native';
 
+import { logout } from '../../redux/actions/index';
 import Card from '../Shared/Card';
 import common from '../styles/common.style';
 
@@ -49,7 +50,7 @@ class Home extends Component {
     }
 
     logOut = async () => {
-        await AsyncStorage.clear();
+        await this.props.logout();
         this.props.navigation.navigate('Auth');
     };
     
@@ -78,10 +79,17 @@ class Home extends Component {
     };
 }
 
+
 const mapStateToProps = state => {
     return {
         user: state.user
     };
 };
 
-export default connect(mapStateToProps, null)(Home);
+function mapDispatchToProps() {
+    return {
+        logout
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps())(Home);

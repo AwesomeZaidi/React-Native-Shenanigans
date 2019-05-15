@@ -16,5 +16,10 @@ export default StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         color: secondary
-      },
+    },
+    errorMsg: {
+        color: danger,
+        fontSize: 18,
+        textAlign: 'center'
+    }
 });

@@ -1,10 +1,16 @@
 // src/redux/reducers/index.js
 
+// ----------------------------------------------------------------------------------
+// Imports
+// ----------------------------------------------------------------------------------
 import { HANDLE_LOGIN, HANDLE_SIGNUP, HANDLE_ERROR,
-  HANDLE_LOGOUT, LOAD_DATA } from "../constants/action-types";
+        HANDLE_LOGOUT, LOAD_DATA
+} from "../constants/action-types";
+
+import { AsyncStorage } from 'react-native';
 
 const initialState = {
-  user: "not set yet.",
+  user: "",
   error: false
 };
 
@@ -19,6 +25,7 @@ function rootReducer(state = initialState, action) {
     case HANDLE_ERROR:
       return {...state, error: action.payload}
     case HANDLE_LOGOUT:
+      AsyncStorage.clear();
       return {...state, user: "", restaurant: "", error: false}
     default: 
         return state;

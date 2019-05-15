@@ -1,5 +1,8 @@
 // src/js/actions/index.js
 
+// ----------------------------------------------------------------------------------
+// Imports
+// ----------------------------------------------------------------------------------
 import { HANDLE_LOGIN, HANDLE_SIGNUP, HANDLE_LOGOUT,
     HANDLE_ERROR, LOAD_DATA } from "../constants/action-types";
 import axios from "axios";
@@ -14,11 +17,11 @@ export const loadData = (state) => {
 };
 
 export function login(loginState) {
-    return (dispatcher) => { // read more into dispatcher
+    return (dispatcher) => {
         axios.post(`${baseUrl}users/v0/login`, loginState).then((res) => {
             dispatcher(handleLogin(res.data.user)); // THUNKED IT!
         }).catch((err) => {
-            dispatcher(handleLogin(true));
+            dispatcher(handleError(true));
         });
     };
 };
@@ -32,10 +35,8 @@ export const handleLogin = (user) => {
 };
 
 export function signUp(signupState) {
-    // console.log('signupstate:', signupState);
     return (dispatcher) => {
         axios.post(`${baseUrl}users/v0/signup`, signupState).then((res) => {
-            console.log('res.data:', res.data);
             dispatcher(handleSignup(res.data));
         }).catch((err) => {
             console.log('err:', err);            

@@ -27,7 +27,8 @@ class SignUp extends Component {
         password: '',
         emailFocused: false,
         usernameFocused: false,
-        passwordFocused: false
+        passwordFocused: false,
+        showError: false // doing this here so when app refresh happens, it goes away! :D
     };
 
     // ------------------------------------------
@@ -74,12 +75,14 @@ class SignUp extends Component {
     // signUp redux action handler function attached to props. 
     // ------------------------------------------ 
     handleSubmit = async () => {
-        try {
-            await this.props.signUp(this.state);
+        const res  = await this.props.signUp(this.state);
+        if (res === undefined) {
+            this.setState({
+                showError: true
+            })
+        } else {
             this.props.navigation.navigate('App');
-        } catch(err) {
-            console.log("Error fetching data-----------", err);
-        }
+        };
     };
 
     // ------------------------------------------
@@ -130,6 +133,7 @@ class SignUp extends Component {
                 autoCapitalize = 'none'
                 secureTextEntry={true}
             />
+            {this.state.showError ? <Text style={common.errorMsg}>Something went wrong</Text> : null }
             <Button
                 title="Signup"
                 buttonStyle={styles.primary_btn}
@@ -146,7 +150,8 @@ class SignUp extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        error: state.error
     };
 };
 
