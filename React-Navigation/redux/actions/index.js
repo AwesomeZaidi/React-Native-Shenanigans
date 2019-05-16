@@ -13,7 +13,7 @@ export const loadData = (state) => {
     return {
         type: LOAD_DATA,
         payload: state
-    }
+    };
 };
 
 export function login(loginState) {
@@ -34,14 +34,14 @@ export const handleLogin = (user) => {
     };
 };
 
-export function signUp(signupState) {
-    return (dispatcher) => {
-        axios.post(`${baseUrl}users/v0/signup`, signupState).then((res) => {
+export function signUp (signupState) {
+    return async (dispatcher) => {
+        const res = await axios.post(`${baseUrl}users/v0/signup`, signupState)
+        if (res.status === 200) {
             dispatcher(handleSignup(res.data));
-        }).catch((err) => {
-            console.log('err:', err);            
+        } else {
             dispatcher(handleError(true));
-        });
+        }
     };
 };
 

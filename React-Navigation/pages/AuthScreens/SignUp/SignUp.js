@@ -71,29 +71,23 @@ class SignUp extends Component {
         null
     };
 
-    // ------------------------------------------
+    // --------------------------------------------------------
     // signUp redux action handler function attached to props. 
-    // ------------------------------------------ 
+    // --------------------------------------------------------
     handleSubmit = async () => {
-        const res  = await this.props.signUp(this.state);
-        if (res === undefined) {
+        try {
+            await this.props.signUp(this.state);
+            this.props.navigation.navigate('App');
+        } catch {
             this.setState({
                 showError: true
-            })
-        } else {
-            this.props.navigation.navigate('App');
-        };
+            });
+        }
     };
-
-    // ------------------------------------------
-    // signIn component function that navigates user to SignIn screen. 
-    // ------------------------------------------  
-    signIn = () => {
-        this.props.navigation.navigate('SignIn');
-    };
-
 
     render() {
+        console.log('this.state.showError:', this.state.showError);
+        
         return (
           <ScrollView
             style={styles.form}
