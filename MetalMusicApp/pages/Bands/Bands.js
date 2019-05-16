@@ -7,9 +7,15 @@ import common from '../styles/common.style';
 import commonStyle from '../styles/common.style';
 
 export default class Bands extends Component {
-    // goToBandPage = () => {
-    //     this.state.navigation.navigate('Stat')
+    
+    // not enough time for that.
+    // _viewBandStats = () => {
+    //     this.props.navigation.navigate('Detail');
     // };
+
+    static navigationOptions = {
+		title: 'Bands'
+    };
 
     render() {
         return (
@@ -20,7 +26,7 @@ export default class Bands extends Component {
                         renderItem={({item}) => (
                             <ScrollView
                             key={item.key}
-                            // onClick={() => this.goToBandPage()}
+                            // onClick={this._viewBandStats}
                             contentContainerStyle={common.listItem}
                             >
                                 <View>

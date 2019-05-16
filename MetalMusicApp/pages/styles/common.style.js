@@ -45,6 +45,7 @@ export default StyleSheet.create({
         marginTop: 14,
         marginBottom: 14,
         fontSize: 20,
+        color: placeholder,
         fontWeight: 'bold',
     },
     listFansText: {
@@ -61,7 +62,9 @@ export default StyleSheet.create({
         textAlign: 'right'
     },
     topDownCenter: {
+        marginTop: 40,
         display: 'flex',
+        backgroundColor: bg,
         // flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

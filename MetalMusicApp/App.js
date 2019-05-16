@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, Text, Button, ScrollView, TextInput } from 'react-native';
 import BandsScreen from './pages/Bands/';
 import StatsScreen from './pages/Stats/';
+import common from './pages/styles/common.style';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -50,7 +51,7 @@ class App extends React.Component {
 	render() {
 	  return (
 		// <Provider store={store}>
-		  <MainNavigator />
+		  <MainNavigator style={common.pageBg}/>
 		// </Provider>
 	  );
 	};
