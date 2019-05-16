@@ -7,6 +7,10 @@ import common from '../styles/common.style';
 import commonStyle from '../styles/common.style';
 
 export default class Bands extends Component {
+    // goToBandPage = () => {
+    //     this.state.navigation.navigate('Stat')
+    // };
+
     render() {
         return (
             <ScrollView>
@@ -16,11 +20,12 @@ export default class Bands extends Component {
                         renderItem={({item}) => (
                             <ScrollView
                             key={item.key}
+                            // onClick={() => this.goToBandPage()}
                             contentContainerStyle={common.listItem}
                             >
-                                <View >
+                                <View>
                                     <TextInput
-                                        style={common.listTitle}
+                                        style={item.split === '-' ? common.listSplitTitle : common.listTitle }
                                         editable={false}
                                         value={`${item.band_name}`}
                                     >
@@ -28,7 +33,7 @@ export default class Bands extends Component {
                                     <TextInput
                                         style={common.listText}
                                         editable={false}
-                                        value={`${item.formed}`} 
+                                        value={`${item.formed}`}
                                     >
                                     </TextInput>
                                 </View>

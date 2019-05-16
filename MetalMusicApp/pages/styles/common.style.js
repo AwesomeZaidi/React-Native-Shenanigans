@@ -31,12 +31,20 @@ export default StyleSheet.create({
         color: primary,
         fontWeight: 'bold',
     },
+    listSplitTitle: {
+        marginLeft: 14,
+        marginTop: 14,
+        marginBottom: 14,
+        fontSize: 20,
+        color: placeholder,
+        textDecorationLine: 'line-through',
+        fontWeight: 'bold',
+    },
     listCountryTitle: {
         marginRight: 14,
         marginTop: 14,
         marginBottom: 14,
         fontSize: 20,
-        color: placeholder,
         fontWeight: 'bold',
     },
     listFansText: {
